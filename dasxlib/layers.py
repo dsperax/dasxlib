@@ -55,7 +55,7 @@ class Linear(Layer):
 F = Callable[[Tensor], Tensor]
 
 class Activation(Layer):
-    #a camadas e ativação apenas aplica uma função aos elementos de entrada(inputs)
+    #a camada de ativação apenas aplica uma função aos elementos de entrada(inputs)
     def __init__(self, f: F, f_prime: F) -> None:
         super().__init__()
         self.f = f
