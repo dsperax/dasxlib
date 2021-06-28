@@ -55,7 +55,7 @@ class Linear(Layer):
 F = Callable[[Tensor], Tensor]
 
 class Activation(Layer):
-    #a camada de ativação apenas aplica uma função aos elementos de entrada(inputs)
+    #a camadas e ativação apenas aplica uma função aos elementos de entrada(inputs)
     def __init__(self, f: F, f_prime: F) -> None:
         super().__init__()
         self.f = f
@@ -82,3 +82,64 @@ def tanh_prime(x: Tensor) -> Tensor:
 class Tanh(Activation):
     def __init__(self):
         super().__init__(tanh, tanh_prime)
+
+
+'''
+Tentativa de implementar método de ficonacci
+#iterator
+
+class Fibonacci:
+  def __init__(self, maximo=1000000):
+    # Inicializa os dois primeiros numeros
+    self.elemento_atual, self.proximo_elemento = 0, 1
+    self.maximo = maximo
+
+  def __iter__(self):
+    # Retorna o objeto iterável (ele próprio: self)
+    return self
+
+  def __next__(self):
+    # Fim da iteração, raise StopIteration
+    if self.elemento_atual > self.maximo:
+      raise StopIteration
+
+    # Salva o valor a ser retornado
+    valor_de_retorno = self.elemento_atual
+
+    # Atualiza o próximo elemento da sequencia
+    self.elemento_atual, self.proximo_elemento = self.proximo_elemento, self.elemento_atual + self.proximo_elemento
+
+    return valor_de_retorno
+        
+# Executa nosso código
+if __name__ == '__main__':
+  # Cria nosso objeto iterável
+  objeto_fibonacci = Fibonacci(maximo=1000000)
+
+  # Itera nossa sequencia
+  for fibonacci in objeto_fibonacci:
+    print("Sequencia: {}".format(fibonacci))
+
+#generator
+
+def fibonacci(maximo):
+  # Inicialização dos elementos
+  elemento_atual, proximo_elemento = 0, 1
+  
+  # Defina a condição de parada
+  while elemento_atual < maximo:
+    # Retorna o valor do elemento atual
+    yield elemento_atual
+
+    elemento_atual, proximo_elemento = \
+        proximo_elemento, elemento_atual + proximo_elemento
+
+if __name__ == '__main__':
+  # Cria um generator de números fibonacci menor que 1 milhão
+  fibonacci_generator = fibonacci(1000000)
+
+  # Mostra na tela toda a sequencia
+  for numero_fibonacci in fibonacci_generator:
+    print("Sequencia:",numero_fibonacci)
+
+'''
